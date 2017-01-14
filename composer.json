@@ -1,6 +1,6 @@
 {
   "name": "fusio/adapter-neo4j",
-  "description": "Adapter which helps to work with a Neo4j service",
+  "description": "Provides a connection to work with a Neo4j service",
   "homepage": "http://fusio-project.org",
   "keywords": ["fusio-adapter"],
   "license": "AGPL-3.0",
