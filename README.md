@@ -1,7 +1,7 @@
 Fusio-Adapter-Neo4j
 =====
 
-[Fusio] adapter which provides a connection to work with a Neo4j database. The 
+[Fusio] adapter which provides a connection to work with a Neo4j service. The 
 adapter uses the `graphaware/neo4j-php-client` package. You can install the 
 adapter with the following steps inside your Fusio project:
 
