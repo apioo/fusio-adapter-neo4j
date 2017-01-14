@@ -1,0 +1,5 @@
+{
+  "connectionClass": [
+    "Fusio\\Adapter\\Neo4j\\Connection\\Neo4j"
+  ]
+}
