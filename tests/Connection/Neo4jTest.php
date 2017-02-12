@@ -42,16 +42,16 @@ class Neo4jTest extends \PHPUnit_Framework_TestCase
 
     public function testGetConnection()
     {
-        /** @var Neo4j $connection */
-        $connection = $this->getConnectionFactory()->factory(Neo4j::class);
+        /** @var Neo4j $connectionFactory */
+        $connectionFactory = $this->getConnectionFactory()->factory(Neo4j::class);
 
         $config = new Parameters([
             'uri' => 'http://localhost:7474',
         ]);
 
-        $client = $connection->getConnection($config);
+        $connection = $connectionFactory->getConnection($config);
 
-        $this->assertInstanceOf(ClientInterface::class, $client);
+        $this->assertInstanceOf(ClientInterface::class, $connection);
     }
 
     public function testConfigure()
@@ -67,5 +67,19 @@ class Neo4jTest extends \PHPUnit_Framework_TestCase
         $elements = $builder->getForm()->getProperty('element');
         $this->assertEquals(1, count($elements));
         $this->assertInstanceOf(Input::class, $elements[0]);
+    }
+
+    public function testPing()
+    {
+        /** @var Neo4j $connectionFactory */
+        $connectionFactory = $this->getConnectionFactory()->factory(Neo4j::class);
+
+        $config = new Parameters([
+            'uri' => 'http://localhost:7474',
+        ]);
+
+        $connection = $connectionFactory->getConnection($config);
+
+        $this->assertTrue($connectionFactory->ping($connection));
     }
 }

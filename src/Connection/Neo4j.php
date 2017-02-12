@@ -21,11 +21,13 @@
 
 namespace Fusio\Adapter\Neo4j\Connection;
 
+use Fusio\Engine\Connection\PingableInterface;
 use Fusio\Engine\ConnectionInterface;
 use Fusio\Engine\Form\BuilderInterface;
 use Fusio\Engine\Form\ElementFactoryInterface;
 use Fusio\Engine\ParametersInterface;
 use GraphAware\Neo4j\Client\ClientBuilder;
+use GraphAware\Neo4j\Client\ClientInterface;
 
 /**
  * Neo4j
@@ -34,7 +36,7 @@ use GraphAware\Neo4j\Client\ClientBuilder;
  * @license http://www.gnu.org/licenses/agpl-3.0
  * @link    http://fusio-project.org
  */
-class Neo4j implements ConnectionInterface
+class Neo4j implements ConnectionInterface, PingableInterface
 {
     public function getName()
     {
@@ -55,5 +57,17 @@ class Neo4j implements ConnectionInterface
     public function configure(BuilderInterface $builder, ElementFactoryInterface $elementFactory)
     {
         $builder->add($elementFactory->newInput('uri', 'URI', 'text', 'URI of the connection i.e. <code>http://neo4j:password@localhost:7474</code>'));
+    }
+
+    public function ping($connection)
+    {
+        if ($connection instanceof ClientInterface) {
+            $result = $connection->run('RETURN [0, 1] AS list');
+            $result->firstRecord();
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }
