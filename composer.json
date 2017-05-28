@@ -13,7 +13,7 @@
   ],
   "require": {
     "php": ">=5.6",
-    "fusio/engine": "^0.6@dev",
+    "fusio/engine": "^0.7@dev",
     "graphaware/neo4j-php-client": "^4.6"
   },
   "require-dev": {
