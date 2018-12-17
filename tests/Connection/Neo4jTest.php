@@ -28,6 +28,7 @@ use Fusio\Engine\Form\Element\Input;
 use Fusio\Engine\Parameters;
 use Fusio\Engine\Test\EngineTestCaseTrait;
 use GraphAware\Neo4j\Client\ClientInterface;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Neo4jTest
@@ -36,7 +37,7 @@ use GraphAware\Neo4j\Client\ClientInterface;
  * @license http://www.gnu.org/licenses/agpl-3.0
  * @link    http://fusio-project.org
  */
-class Neo4jTest extends \PHPUnit_Framework_TestCase
+class Neo4jTest extends TestCase
 {
     use EngineTestCaseTrait;
 
