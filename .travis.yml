@@ -1,8 +1,8 @@
 language: php
 php:
-  - 7.0
   - 7.1
   - 7.2
+  - 7.3
 env:
   global:
     - JAVA_HOME=/usr/lib/jvm/java-8-oracle
@@ -27,7 +27,7 @@ before_install:
   - ${NEO_DIR}/bin/neo4j start > null &
   - popd
   # remove xdebug
-  - phpenv config-rm xdebug.ini
+  - if [ $TRAVIS_PHP_VERSION != '7.3' ]; then phpenv config-rm xdebug.ini; fi;
 install:
   - composer install
 script:
