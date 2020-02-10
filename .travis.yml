@@ -27,7 +27,7 @@ before_install:
   - ${NEO_DIR}/bin/neo4j start > null &
   - popd
   # remove xdebug
-  - if [ $TRAVIS_PHP_VERSION != '7.3' ]; then phpenv config-rm xdebug.ini; fi;
+  - if [ $TRAVIS_PHP_VERSION == '7.2' ]; then phpenv config-rm xdebug.ini; fi;
 install:
   - composer install
 script:
