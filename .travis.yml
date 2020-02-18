@@ -4,6 +4,7 @@ php:
   - 7.3
   - 7.4
 sudo: false
+dist: trusty
 services:
   - neo4j
 before_install:
