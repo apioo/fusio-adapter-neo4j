@@ -22,7 +22,7 @@ jobs:
           --health-interval 10s
           --health-start-period 30s
         ports:
-          - 7687:7687
+          - 7474:7474
     steps:
       - name: Checkout
         uses: actions/checkout@v2
