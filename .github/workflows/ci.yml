@@ -16,7 +16,7 @@ jobs:
       neo4j:
         image: neo4j
         options: >-
-          --health-cmd "cypher-shell 'match (n) return count(n)'"
+          --health-cmd "wget http://localhost:7474/browser -O -"
           --health-timeout 10s
           --health-retries 20
           --health-interval 10s
