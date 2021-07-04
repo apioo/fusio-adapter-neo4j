@@ -15,14 +15,14 @@ jobs:
     services:
       neo4j:
         image: neo4j
-        ports:
-          - 7687:7687
         options: >-
           --health-cmd "cypher-shell 'match (n) return count(n)'"
           --health-timeout 10s
           --health-retries 20
           --health-interval 10s
           --health-start-period 30s
+        ports:
+          - 7687:7687
     steps:
       - name: Checkout
         uses: actions/checkout@v2
