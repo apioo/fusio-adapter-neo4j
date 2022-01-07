@@ -27,7 +27,7 @@ use Fusio\Engine\Form\Container;
 use Fusio\Engine\Form\Element\Input;
 use Fusio\Engine\Parameters;
 use Fusio\Engine\Test\EngineTestCaseTrait;
-use GraphAware\Neo4j\Client\ClientInterface;
+use Laudis\Neo4j\Contracts\ClientInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -48,6 +48,8 @@ class Neo4jTest extends TestCase
 
         $config = new Parameters([
             'uri' => 'http://localhost:7474',
+            'username' => 'neo4j',
+            'password' => 'neo4j',
         ]);
 
         $connection = $connectionFactory->getConnection($config);
@@ -65,7 +67,7 @@ class Neo4jTest extends TestCase
 
         $this->assertInstanceOf(Container::class, $builder->getForm());
 
-        $elements = $builder->getForm()->getProperty('element');
+        $elements = $builder->getForm()->getElements();
         $this->assertEquals(1, count($elements));
         $this->assertInstanceOf(Input::class, $elements[0]);
     }
