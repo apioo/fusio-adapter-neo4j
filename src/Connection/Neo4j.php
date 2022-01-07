@@ -47,15 +47,13 @@ class Neo4j implements ConnectionInterface, PingableInterface
     public function getConnection(ParametersInterface $config): ClientInterface
     {
         return ClientBuilder::create()
-            ->withDriver('https', 'https://' . $config->get('host'), Authenticate::basic($config->get('username'), $config->get('password')))
+            ->withDriver('https', $config->get('uri'))
             ->build();
     }
 
     public function configure(BuilderInterface $builder, ElementFactoryInterface $elementFactory): void
     {
-        $builder->add($elementFactory->newInput('host', 'Host', 'text', 'URI of the connection i.e. <code>http://neo4j:password@localhost:7474</code>'));
-        $builder->add($elementFactory->newInput('username', 'Username', 'text', 'URI of the connection i.e. <code>http://neo4j:password@localhost:7474</code>'));
-        $builder->add($elementFactory->newInput('password', 'Password', 'password', 'URI of the connection i.e. <code>http://neo4j:password@localhost:7474</code>'));
+        $builder->add($elementFactory->newInput('uri', 'Url', 'url', 'URL of the connection i.e. <code>http://neo4j:neo4j@localhost:7474</code>'));
     }
 
     public function ping(mixed $connection): bool

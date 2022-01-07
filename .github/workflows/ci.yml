@@ -16,12 +16,6 @@ jobs:
         image: neo4j
         env:
           NEO4J_AUTH: neo4j/neo4j
-        options: >-
-          --health-cmd "wget http://localhost:7474/browser -O -"
-          --health-timeout 10s
-          --health-retries 20
-          --health-interval 10s
-          --health-start-period 30s
         ports:
           - 7474:7474
     steps:
