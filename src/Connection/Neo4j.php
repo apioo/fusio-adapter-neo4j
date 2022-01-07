@@ -3,7 +3,7 @@
  * Fusio
  * A web-application to create dynamically RESTful APIs
  *
- * Copyright (C) 2015-2018 Christoph Kappestein <christoph.kappestein@gmail.com>
+ * Copyright (C) 2015-2022 Christoph Kappestein <christoph.kappestein@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -26,40 +26,39 @@ use Fusio\Engine\ConnectionInterface;
 use Fusio\Engine\Form\BuilderInterface;
 use Fusio\Engine\Form\ElementFactoryInterface;
 use Fusio\Engine\ParametersInterface;
-use GraphAware\Neo4j\Client\ClientBuilder;
-use GraphAware\Neo4j\Client\ClientInterface;
+use Laudis\Neo4j\Authentication\Authenticate;
+use Laudis\Neo4j\ClientBuilder;
+use Laudis\Neo4j\Contracts\ClientInterface;
 
 /**
  * Neo4j
  *
  * @author  Christoph Kappestein <christoph.kappestein@gmail.com>
  * @license http://www.gnu.org/licenses/agpl-3.0
- * @link    http://fusio-project.org
+ * @link    https://www.fusio-project.org/
  */
 class Neo4j implements ConnectionInterface, PingableInterface
 {
-    public function getName()
+    public function getName(): string
     {
         return 'Neo4j';
     }
 
-    /**
-     * @param \Fusio\Engine\ParametersInterface $config
-     * @return \GraphAware\Neo4j\Client\ClientInterface
-     */
-    public function getConnection(ParametersInterface $config)
+    public function getConnection(ParametersInterface $config): ClientInterface
     {
         return ClientBuilder::create()
-            ->addConnection('default', $config->get('uri'))
+            ->withDriver('https', 'https://' . $config->get('host'), Authenticate::basic($config->get('username'), $config->get('password')))
             ->build();
     }
 
-    public function configure(BuilderInterface $builder, ElementFactoryInterface $elementFactory)
+    public function configure(BuilderInterface $builder, ElementFactoryInterface $elementFactory): void
     {
-        $builder->add($elementFactory->newInput('uri', 'URI', 'text', 'URI of the connection i.e. <code>http://neo4j:password@localhost:7474</code>'));
+        $builder->add($elementFactory->newInput('host', 'Host', 'text', 'URI of the connection i.e. <code>http://neo4j:password@localhost:7474</code>'));
+        $builder->add($elementFactory->newInput('username', 'Username', 'text', 'URI of the connection i.e. <code>http://neo4j:password@localhost:7474</code>'));
+        $builder->add($elementFactory->newInput('password', 'Password', 'password', 'URI of the connection i.e. <code>http://neo4j:password@localhost:7474</code>'));
     }
 
-    public function ping($connection)
+    public function ping(mixed $connection): bool
     {
         if ($connection instanceof ClientInterface) {
             $result = $connection->run('RETURN [0, 1] AS list');
