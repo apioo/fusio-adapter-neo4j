@@ -47,7 +47,7 @@ class Neo4jTest extends TestCase
         $connectionFactory = $this->getConnectionFactory()->factory(Neo4j::class);
 
         $config = new Parameters([
-            'uri' => 'http://neo4j:neo4j@localhost:7474',
+            'uri' => 'bolt://neo4j:neo4j@localhost:7687',
         ]);
 
         $connection = $connectionFactory->getConnection($config);
@@ -76,7 +76,7 @@ class Neo4jTest extends TestCase
         $connectionFactory = $this->getConnectionFactory()->factory(Neo4j::class);
 
         $config = new Parameters([
-            'uri' => 'http://neo4j:neo4j@localhost:7474',
+            'uri' => 'bolt://neo4j:neo4j@localhost:7687',
         ]);
 
         $connection = $connectionFactory->getConnection($config);

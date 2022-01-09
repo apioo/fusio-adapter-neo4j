@@ -53,7 +53,7 @@ class Neo4j implements ConnectionInterface, PingableInterface
 
     public function configure(BuilderInterface $builder, ElementFactoryInterface $elementFactory): void
     {
-        $builder->add($elementFactory->newInput('uri', 'Url', 'url', 'URL of the connection i.e. <code>http://neo4j:neo4j@localhost:7474</code>'));
+        $builder->add($elementFactory->newInput('uri', 'Url', 'url', 'URL of the connection i.e. <code>bolt://neo4j:neo4j@localhost:7687</code>'));
     }
 
     public function ping(mixed $connection): bool
