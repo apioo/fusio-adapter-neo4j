@@ -47,7 +47,8 @@ class Neo4j implements ConnectionInterface, PingableInterface
     public function getConnection(ParametersInterface $config): ClientInterface
     {
         return ClientBuilder::create()
-            ->withDriver('https', $config->get('uri'))
+            ->withDriver('bolt', $config->get('uri'))
+            ->withDefaultDriver('bolt')
             ->build();
     }
 

@@ -43,7 +43,6 @@ class Neo4jTest extends TestCase
 
     public function testGetConnection()
     {
-        /** @var Neo4j $connectionFactory */
         $connectionFactory = $this->getConnectionFactory()->factory(Neo4j::class);
 
         $config = new Parameters([
