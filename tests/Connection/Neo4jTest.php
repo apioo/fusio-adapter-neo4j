@@ -22,13 +22,12 @@
 namespace Fusio\Adapter\Neo4j\Tests\Connection;
 
 use Fusio\Adapter\Neo4j\Connection\Neo4j;
+use Fusio\Adapter\Neo4j\Tests\Neo4jTestCase;
 use Fusio\Engine\Form\Builder;
 use Fusio\Engine\Form\Container;
 use Fusio\Engine\Form\Element\Input;
 use Fusio\Engine\Parameters;
-use Fusio\Engine\Test\EngineTestCaseTrait;
 use Laudis\Neo4j\Contracts\ClientInterface;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Neo4jTest
@@ -37,10 +36,8 @@ use PHPUnit\Framework\TestCase;
  * @license http://www.gnu.org/licenses/agpl-3.0
  * @link    https://www.fusio-project.org/
  */
-class Neo4jTest extends TestCase
+class Neo4jTest extends Neo4jTestCase
 {
-    use EngineTestCaseTrait;
-
     public function testGetConnection()
     {
         $connectionFactory = $this->getConnectionFactory()->factory(Neo4j::class);
