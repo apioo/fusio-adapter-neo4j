@@ -22,6 +22,7 @@
 namespace Fusio\Adapter\Neo4j\Connection;
 
 use Fusio\Engine\Connection\PingableInterface;
+use Fusio\Engine\ConnectionAbstract;
 use Fusio\Engine\ConnectionInterface;
 use Fusio\Engine\Form\BuilderInterface;
 use Fusio\Engine\Form\ElementFactoryInterface;
@@ -38,7 +39,7 @@ use Laudis\Neo4j\Databags\SummarizedResult;
  * @license http://www.gnu.org/licenses/agpl-3.0
  * @link    https://www.fusio-project.org/
  */
-class Neo4j implements ConnectionInterface, PingableInterface
+class Neo4j extends ConnectionAbstract implements PingableInterface
 {
     public function getName(): string
     {
