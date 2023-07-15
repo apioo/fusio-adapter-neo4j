@@ -21,25 +21,9 @@
 
 namespace Fusio\Adapter\Neo4j\Tests;
 
-use Fusio\Adapter\Mongodb\Action\MongoDeleteOne;
-use Fusio\Adapter\Mongodb\Action\MongoFindAll;
-use Fusio\Adapter\Mongodb\Action\MongoFindOne;
-use Fusio\Adapter\Mongodb\Action\MongoInsertOne;
-use Fusio\Adapter\Mongodb\Action\MongoUpdateOne;
-use Fusio\Adapter\Mongodb\Connection\MongoDB;
-use Fusio\Adapter\Mongodb\Generator\MongoCollection;
-use Fusio\Adapter\Mqtt\Action\MqttPublish;
-use Fusio\Adapter\Mqtt\Connection\Mqtt;
-use Fusio\Adapter\Neo4j\Connection\Neo4j;
-use Fusio\Engine\Action\Runtime;
-use Fusio\Engine\ConnectorInterface;
-use Fusio\Engine\Model\Connection;
-use Fusio\Engine\Parameters;
-use Fusio\Engine\Test\CallbackConnection;
+use Fusio\Adapter\Neo4j\Adapter;
 use Fusio\Engine\Test\EngineTestCaseTrait;
-use PhpMqtt\Client\MqttClient;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\DependencyInjection\Container;
 
 /**
  * Neo4jTestCase
@@ -52,8 +36,8 @@ abstract class Neo4jTestCase extends TestCase
 {
     use EngineTestCaseTrait;
 
-    protected function configure(Runtime $runtime, Container $container): void
+    protected function getAdapterClass(): string
     {
-        $container->set(Neo4j::class, new Neo4j());
+        return Adapter::class;
     }
 }
